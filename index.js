@@ -1,7 +1,7 @@
 let github;
 let context;
 
-const isDebug = process.env.ACTIONS_RUNNER_DEBUG;
+const isDebug = process.env.RUNNER_DEBUG;
 
 function debugLog(...args) {
     if (isDebug) {

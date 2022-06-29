@@ -11,6 +11,7 @@ runs:
 
     - run : env
       shell: bash
+      if : ${{ env.RUNNER_DEBUG == 1 }}
 
     - name: Wait for manual approval
       uses: actions/github-script@v6
