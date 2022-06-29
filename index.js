@@ -51,7 +51,7 @@ async function createIssue(description) {
         title: `Request for approval from workflow ${context.workflow} #${context.runNumber}`,
         body: "To approve the workflow step add a comment `approved` or `rejected` to reject"
     });
-    var issueNumber = response.issue.number;
+    var issueNumber = response.data.number;
     debugLog("Create issue response", response);
     console.log(`Created issue ${issueNumber}. Awaiting approval.`);
 
