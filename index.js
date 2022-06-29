@@ -50,9 +50,9 @@ async function createIssue() {
         repo: context.repo.repo,
         title: "Request for approval from github action",
         body: "To approve the request add a comment `approved`, to reject the request add a comment `rejected`"
-    });
+    });    
     debugLog("Create issue response", response);
-    console.log(`Created issue ${issue.number}. Awaiting approval.`);
+    console.log(`Created issue ${response.data.number}. Awaiting approval.`);
     return response.data;
 }
 
