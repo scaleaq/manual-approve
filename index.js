@@ -1,4 +1,5 @@
 let github;
+let context;
 
 const isDebug = process.env.ACTIONS_RUNNER_DEBUG;
 
@@ -78,7 +79,8 @@ async function createIssueAndWaitForApproval(timeoutInMinutes) {
     }
 }
 
-module.exports = async (context, {timeoutInMinutes}) => {
-    github = context.github;
+module.exports = async (scriptArguments, {timeoutInMinutes}) => {
+    github = scriptArguments.github;
+    context = scriptArguments.context;
     await createIssueAndWaitForApproval(timeoutInMinutes);
 }
