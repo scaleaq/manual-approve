@@ -8,7 +8,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Waiting for manual approval
+
+    - run : env
+      shell: bash
+
+    - name: Wait for manual approval
       uses: actions/github-script@v6
       with:
         script: |
