@@ -17,4 +17,12 @@ runs:
       with:
         script: |
           const script = require('${{ github.action_path }}/index.js');
-          await script({github}, ${{ inputs.timeout-in-minutes }});
+          await script(
+            {
+              github,
+              context
+            },
+            {
+              timeoutInMinutes: ${{ inputs.timeout-in-minutes }}
+            }
+          );
