@@ -48,8 +48,8 @@ async function createIssue(description) {
     var response = await github.rest.issues.create({
         owner: context.repo.owner,
         repo: context.repo.repo,
-        title: `Request for approval from workflow ${context.workflow} #${context.runNumber}`,
-        body: "To approve the workflow step add a comment `approved` or `rejected` to reject"
+        title: `Request for approval from workflow "${context.workflow} #${context.runNumber}"`,
+        body: "Add a comment `approved` or `rejected` to perform the corresponding action with the workflow step."
     });
     var issueNumber = response.data.number;
     debugLog("Create issue response", response);
