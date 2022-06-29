@@ -27,8 +27,9 @@ jobs:
 ```
 
 Parameters:
-    * description: Optional, adds additional description to the issue
-    * timeout-in-minutes: Optional, set by default to 10
+
+* `description`: Optional, adds additional description to the issue
+* `timeout-in-minutes`: Optional, set by default to 10
 
 ## Important considerations
 Due to limitations of github actions (it requires enterprise subscription for manual approval) this composite action was created. The downside is that it is using github actions minutes for waiting so should be used sparingly and timeout-in-minutes should be as little as possible. Please also approve fast :)
