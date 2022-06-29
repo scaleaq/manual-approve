@@ -1,8 +1,11 @@
-name: 'Wait for manual approval'
-description: 'Create an issue and wait for an "approved" comment'
+name: Wait for manual approval
+description: Create an issue and wait for an "approved" comment
 inputs:
+  description:
+    description: Description of the request that will be visible in an issue
+    required: false
   timeout-in-minutes:
-    description: 'Waiting for approval timeout in minutes'
+    description: Waiting for approval timeout in minutes
     required: true
     default: '10'
 runs:
@@ -24,6 +27,7 @@ runs:
               context
             },
             {
+              description: ${{ inputs.description }}
               timeoutInMinutes: ${{ inputs.timeout-in-minutes }}
             }
           );

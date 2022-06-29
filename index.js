@@ -44,16 +44,32 @@ async function waitForApproval(issueNumber, timeoutInMinutes) {
     return false;
 }
 
-async function createIssue() {
+async function createIssue(description) {
     var response = await github.rest.issues.create({
         owner: context.repo.owner,
         repo: context.repo.repo,
-        title: "Request for approval from github action",
-        body: "To approve the request add a comment `approved`, to reject the request add a comment `rejected`"
-    });    
+        title: `Request for approval from workflow ${context.workflow} #${context.runNumber}`,
+        body: "To approve the workflow step add a comment `approved` or `rejected` to reject"
+    });
+    var issueNumber = response.issue.number;
     debugLog("Create issue response", response);
-    console.log(`Created issue ${response.data.number}. Awaiting approval.`);
+    console.log(`Created issue ${issueNumber}. Awaiting approval.`);
+
+    if (description) {
+        await createComment(issueNumber, description);
+    }
+
     return response.data;
+}
+
+async function createComment(issueNumber, body) {
+    var response = await github.rest.issues.createComment({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: issueNumber,
+        body: body
+    });    
+    debugLog("Create issue comment response", response);
 }
 
 async function closeIssue(issue, isApproved) {
@@ -67,8 +83,8 @@ async function closeIssue(issue, isApproved) {
     debugLog(`Close issue ${issue.number} response`, response);
 }
 
-async function createIssueAndWaitForApproval(timeoutInMinutes) {
-    var issue = await createIssue();
+async function createIssueAndWaitForApproval({timeoutInMinutes, description}) {
+    var issue = await createIssue(description);
     var isApproved = await waitForApproval(issue.number, timeoutInMinutes);
     await closeIssue(issue, isApproved);
 
@@ -79,8 +95,8 @@ async function createIssueAndWaitForApproval(timeoutInMinutes) {
     }
 }
 
-module.exports = async (scriptArguments, {timeoutInMinutes}) => {
-    github = scriptArguments.github;
-    context = scriptArguments.context;
-    await createIssueAndWaitForApproval(timeoutInMinutes);
+module.exports = async (scriptContext, scriptInputs) => {
+    github = scriptContext.github;
+    context = scriptContext.context;
+    await createIssueAndWaitForApproval(scriptInputs);
 }
