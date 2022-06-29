@@ -12,12 +12,9 @@ runs:
     - run : env
       shell: bash
 
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash 
-
     - name: Wait for manual approval
       uses: actions/github-script@v6
       with:
         script: |
-          const script = require('./index.js');
+          const script = require('${{ github.action_path }}/index.js');
           await script({github}, ${{ inputs.timeout-in-minutes }});
