@@ -93,7 +93,7 @@ module.exports = async (scriptContext) => {
     core = scriptContext.core;
 
     const scriptInputs = {
-        timeoutInMinutes: parseInt(core.getInput("timeoutInMinutes", { required: true })),
+        timeoutInMinutes: parseInt(core.getInput("timeout-in-minutes", { required: true })),
         description: core.getInput("description", { required: false })
     };
 
