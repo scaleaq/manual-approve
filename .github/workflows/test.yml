@@ -2,11 +2,15 @@
 
 on: 
   workflow_dispatch:
-    inputs:
-      version:
-        description: Version of the action to test
+    inputs:    
+      description:
+        description: Description of the posted issue
         required: true
-        default: v1
+        default: This is an example of a description provided as input to the action.
+      timeout:
+        description: Timeout in minutes to wait for approval
+        required: true
+        default: "1"
 
 jobs:
   test:
@@ -15,7 +19,7 @@ jobs:
     steps:
 
       - name: Testing manual approval (see Issues)
-        uses: scaleaq/manual-approve@${{ github.event.inputs.version }}
+        uses: scaleaq/manual-approve@v1.0.15
         with:
-          description: This is an example of a description provided as input to the action.
-          timeout: 1
+          description: ${{ github.event.inputs.description }}
+          timeout: ${{ github.event.inputs.timeout }}
