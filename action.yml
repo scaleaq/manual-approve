@@ -21,13 +21,4 @@ runs:
       with:
         script: |
           const script = require('${{ github.action_path }}/index.js');
-          await script(
-            {
-              github,
-              context
-            },
-            {
-              description: `${{ inputs.description }}`,
-              timeoutInMinutes: ${{ inputs.timeout-in-minutes }}
-            }
-          );
+          await script({github, context, core});

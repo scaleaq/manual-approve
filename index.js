@@ -1,5 +1,6 @@
 let github;
 let context;
+let core;
 
 const isDebug = process.env.RUNNER_DEBUG;
 
@@ -21,7 +22,7 @@ async function getComments(issueNumber) {
 
 async function waitForApproval(issueNumber, timeoutInMinutes) {
     const timer = ms => new Promise(res => setTimeout(res, ms));
-    
+
     const operationTimeout = timeoutInMinutes * 1000 * 60;
 
     var iterationTimeout = 5000;
@@ -74,7 +75,7 @@ async function closeIssue(issue, isApproved) {
     debugLog(`Close issue ${issue.number} response`, response);
 }
 
-async function createIssueAndWaitForApproval({timeoutInMinutes, description}) {
+async function createIssueAndWaitForApproval({ timeoutInMinutes, description }) {
     var issue = await createIssue(description);
     var isApproved = await waitForApproval(issue.number, timeoutInMinutes);
     await closeIssue(issue, isApproved);
@@ -86,8 +87,15 @@ async function createIssueAndWaitForApproval({timeoutInMinutes, description}) {
     }
 }
 
-module.exports = async (scriptContext, scriptInputs) => {
+module.exports = async (scriptContext) => {
     github = scriptContext.github;
     context = scriptContext.context;
+    core = scriptContext.core;
+
+    const scriptInputs = {
+        timeoutInMinutes: parseInt(core.getInput("timeoutInMinutes", { required: true })),
+        description: core.getInput("description", { required: false })
+    };
+
     await createIssueAndWaitForApproval(scriptInputs);
 }

@@ -1,0 +1,21 @@
+﻿name: Test
+
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version of the action to test
+        required: true
+        default: v1
+
+jobs:
+  test:
+    name: Test action
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Testing manual approval (see Issues)
+        uses: scaleaq/manual-approve@${{ github.event.inputs.version }}
+        with:
+          description: This is an example of a description provided as input to the action.
+          timeout: 1
