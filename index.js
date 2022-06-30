@@ -45,31 +45,22 @@ async function waitForApproval(issueNumber, timeoutInMinutes) {
 }
 
 async function createIssue(description) {
+    var body = "Add a comment `approved` or `rejected` to perform the corresponding action with the workflow step.";
+    if (description) {
+        body = `${description}\n\n${body}`;
+    }
+
     var response = await github.rest.issues.create({
         owner: context.repo.owner,
         repo: context.repo.repo,
         title: `Request for approval from workflow "${context.workflow} #${context.runNumber}"`,
-        body: "Add a comment `approved` or `rejected` to perform the corresponding action with the workflow step."
+        body: body
     });
     var issueNumber = response.data.number;
     debugLog("Create issue response", response);
     console.log(`Created issue ${issueNumber}. Awaiting approval.`);
 
-    if (description) {
-        await createComment(issueNumber, description);
-    }
-
     return response.data;
-}
-
-async function createComment(issueNumber, body) {
-    var response = await github.rest.issues.createComment({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        issue_number: issueNumber,
-        body: body
-    });    
-    debugLog("Create issue comment response", response);
 }
 
 async function closeIssue(issue, isApproved) {
