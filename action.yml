@@ -27,7 +27,7 @@ runs:
               context
             },
             {
-              description: "${{ inputs.description }}",
+              description: `${{ inputs.description }}`,
               timeoutInMinutes: ${{ inputs.timeout-in-minutes }}
             }
           );
