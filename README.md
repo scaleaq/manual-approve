@@ -22,7 +22,7 @@ jobs:
       - name: Waiting for manual approval of (see Issues)
         uses: scaleaq/manual-approve@v1
         with:
-          description: Please check the [output](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) of the Show step and verify that it does not contain unwanted changes.
+          description: Please check the [output](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) of the "Terraform show" step and verify that it does not contain unwanted changes.
           timeout-in-minutes: 5
 ```
 
