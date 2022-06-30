@@ -34,5 +34,8 @@ Parameters:
 ## Important considerations
 Due to limitations of github actions (it requires enterprise subscription for manual approval) this composite action was created. The downside is that it is using github actions minutes for waiting so should be used sparingly and timeout-in-minutes should be as little as possible. Please also approve fast :)
 
+## Testing
+There is a manually triggered workflow in `test.yml` that allows to test how this composite action works in this repository.
+
 ## How to publish
 Client actions are using the tags to reference the composite action. To "update" the major version of the action like v1 e.g. one needs to delete the old tag and create it again with the same name but on another commit. Alternatively all semver tags can be referenced as well and all updates to action should have proper semver tags in addition to major tags like v1.
