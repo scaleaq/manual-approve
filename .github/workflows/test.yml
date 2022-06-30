@@ -19,7 +19,7 @@ jobs:
     steps:
 
       - name: Testing manual approval (see Issues)
-        uses: scaleaq/manual-approve@v1.0.15
+        uses: scaleaq/manual-approve@v1.0.16
         with:
           description: ${{ github.event.inputs.description }}
           timeout-in-minutes: ${{ github.event.inputs.timeout }}
