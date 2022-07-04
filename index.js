@@ -1,7 +1,9 @@
 let github;
 let context;
 
-const isDebug = process.env.RUNNER_DEBUG;
+const env = process.env;
+
+const isDebug = env.RUNNER_DEBUG;
 
 function debugLog(...args) {
     if (isDebug) {
@@ -58,7 +60,7 @@ async function createIssue(description) {
     });
     var issueNumber = response.data.number;
     debugLog("Create issue response", response);
-    console.log(`Created issue ${issueNumber}. Awaiting approval: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/issues/${issueNumber}`);
+    console.log(`Created issue ${issueNumber}. Awaiting approval: ${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/issues/${issueNumber}`);
 
     return response.data;
 }
