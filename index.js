@@ -58,7 +58,7 @@ async function createIssue(description) {
     });
     var issueNumber = response.data.number;
     debugLog("Create issue response", response);
-    console.log(`Created issue ${issueNumber}. Awaiting approval.`);
+    console.log(`Created issue ${issueNumber}. Awaiting approval: ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/issues/${issueNumber}`);
 
     return response.data;
 }
