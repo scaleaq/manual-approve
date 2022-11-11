@@ -29,7 +29,7 @@ jobs:
 Parameters:
 
 * `description`: Optional, adds additional description to the issue.
-* `timeout-in-minutes`: Optional, defines how long the action will wait for the approval before failing the step. Defaults to 10
+* `timeout-in-minutes`: Optional, defines how long the action will wait for the approval before failing the step. Defaults to 30
 
 ## Important considerations
 Due to limitations of github actions (it requires enterprise subscription for manual approval) this composite action was created. The downside is that it is using github actions minutes for waiting so should be used sparingly and timeout-in-minutes should be as little as possible. Please also approve fast 😊.
