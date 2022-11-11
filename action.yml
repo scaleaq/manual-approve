@@ -7,7 +7,7 @@ inputs:
   timeout-in-minutes:
     description: Waiting for approval timeout in minutes
     required: true
-    default: '10'
+    default: '30'
 runs:
   using: "composite"
   steps:
