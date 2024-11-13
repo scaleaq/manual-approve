@@ -16,7 +16,7 @@ Example usage:
 jobs:
   test:
     name: Important job
-    runs-on: ubuntu-latest
+    runs-on: scale
     steps:
       
       - name: Waiting for manual approval of (see Issues)
