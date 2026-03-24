@@ -17,7 +17,7 @@ runs:
       if : ${{ env.RUNNER_DEBUG == 1 }}
 
     - name: Wait for manual approval
-      uses: actions/github-script@v6
+      uses: actions/github-script@v8
       with:
         script: |
           const script = require('${{ github.action_path }}/index.js');
